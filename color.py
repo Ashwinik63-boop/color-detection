@@ -1,7 +1,7 @@
 import pandas as pd
 import cv2
 
-imageUrl = 'colors.jpeg'
+imageUrl = 'image01.jpg'
 clicked = False
 redValue = 0
 greenValue = 0
@@ -10,24 +10,11 @@ xPosition = 0
 yPosition = 0
 
 # Load the color data
-colorNameDataFrame = pd.read_csv('colordetection.csv')
-# Print columns to debug
-print(colorNameDataFrame.columns)
+colorNameDataFrame = pd.read_csv('wikipedia_color_names.csv')
 
-# If columns have spaces or incorrect names, clean them
-colorNameDataFrame.columns = colorNameDataFrame.columns.str.strip()
 
-# Rename columns if they match exactly
-colorNameDataFrame.rename(columns={'Hex (24 bit)': 'Hex', 
-                                   'Red (8 bit)': 'Red', 
-                                   'Green (8 bit)': 'Green', 
-                                   'Blue (8 bit)': 'Blue'}, inplace=True)
-
-# Print renamed columns to verify
-print(colorNameDataFrame.columns)
-
-#colorNameDataFrame.drop(colorNameDataFrame.iloc[:, 5:8], inplace=True, axis=1)
-#colorNameDataFrame.rename(columns={'Hex (24 bit)': 'Hex', 'Red (8 bit)': 'Red', 'Green (8 bit)': 'Green', 'Blue (8 bit)': 'Blue'}, inplace=True)
+colorNameDataFrame.drop(colorNameDataFrame.iloc[:, 5:8], inplace=True, axis=1)
+colorNameDataFrame.rename(columns={'Hex (24 bit)': 'Hex', 'Red (8 bit)': 'Red', 'Green (8 bit)': 'Green', 'Blue (8 bit)': 'Blue'}, inplace=True)
 
 # Load the image
 image = cv2.imread(imageUrl)
